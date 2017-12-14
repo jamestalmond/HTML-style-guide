@@ -1,0 +1,179 @@
+@mixin ratio-placeholder($width, $height) {
+	@if ($width != null && $height != null) {
+		height: 0;
+		padding-top: percentage($height / $width);
+	}
+
+	@else {
+		@warn '$width and $height are required';
+	}
+}
+
+@function calculateRem($size) {
+	$remSize: $size / $defaultFontSize;
+
+	@return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+	font-size: ($size * 1px);
+	font-size: calculateRem($size);
+}
+
+@mixin aoContainer {
+	@include container;
+
+	padding: 0 gutter(6);
+
+	@include susy-breakpoint($landscape, $mobileCol) {
+		@include container($tablet);
+	}
+
+	@include susy-breakpoint($tablet, $tabletCol) {
+		@include container($tablet);
+
+		padding: 0 gutter(12);
+	}
+
+	@include susy-breakpoint($desktop, $tabletCol) {
+		@include container($desktop);
+
+		padding: 0 gutter(18);
+	}
+
+	@include susy-breakpoint($uber, $tabletCol) {
+		@include container($uber);
+
+		padding: 0 gutter(24);
+	}
+}
+
+@mixin responsiveStars($fontSize, $bgColor: rgba(125, 185, 232, 0), $emptyStarColour: #a3abb1, $filledStarColour: #f8d200) {
+	@include font-size($fontSize);
+
+	display: block;
+	position: relative;
+	width: $fontSize * 5px;
+	height: $fontSize + px;
+	font-family: ao-icons;
+	line-height: 1;
+
+	&::before {
+		content: "\e900";
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: $bgColor;
+		color: $emptyStarColour;
+	}
+
+	&::after {
+		content: "\e900";
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		background-color: $bgColor;
+		color: $filledStarColour;
+	}
+
+	&.rating-sprite,
+	&.ratingSprite { // Camelcase class name for backwards compatibility
+		$wholeNumbers: (1, 2, 3, 4);
+		$decimalNumbers: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+		@each $wholeNumber in $wholeNumbers {
+			@each $decimalNumber in $decimalNumbers {
+				&-#{$wholeNumber}-#{$decimalNumber} {
+					&::after {
+						width: (($wholeNumber * 10)+$decimalNumber) * 2%;
+					}
+				}
+				&_#{$wholeNumber}-#{$decimalNumber} { // Underscore prefix in classname for backwards compatibility
+					&:after {
+						width: (($wholeNumber * 10)+$decimalNumber) * 2%;
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin linear-gradient($fromColor, $toColor) {
+	background-color: $toColor;
+	background-image: linear-gradient(top, $fromColor, $toColor); /* stylelint-disable-line function-linear-gradient-no-nonstandard-direction */
+}
+
+@mixin maxLines($numLines, $fontSize, $lineHeight: $PlineHeight) {
+	display: -webkit-box;
+	overflow: hidden;
+	max-height: $numLines * $fontSize * $lineHeight * 1px;
+	-webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+	-webkit-line-clamp: $numLines;
+}
+
+@mixin respond-tablet($min: 600px, $max: 1280px, $orientation: portrait) {
+	@media only screen and (min-device-width: $min) and (max-device-width: $max) and (orientation: $orientation) and (-webkit-min-device-pixel-ratio: 1) {
+		@content;
+	}
+}
+
+@mixin ao-cta($textColor: #ffffff, $background: $green, $includeArrow: true) {
+	display: inline-block;
+	padding: 10px;
+	border-radius: 3px;
+	font-family: $fontFamily;
+	line-height: 1;
+	color: $textColor;
+	background: {
+		color: $background;
+	}
+
+	@include font-size(15);
+	font: {
+		weight: 600;
+	}
+
+	white-space: nowrap;
+
+	&:hover {
+		background: {
+			color: lighten($background, 10%);
+		}
+	}
+
+	@if ($includeArrow) {
+		&::after {
+			display: inline;
+			content: '\2c3';
+			vertical-align: text-bottom;
+			font: {
+				family: ao-icons;
+			}
+			margin: {
+				left: 10px;
+			}
+		}
+	}
+}
+
+$allowDebug: false !default;
+
+@mixin debug($colour, $text: '') {
+	@if ($allowDebug) {
+		border: 1px solid $colour;
+
+		@if ($text) {
+			&::before {
+				content: $text;
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 8px;
+				background: $colour;
+				color: white;
+				z-index: 9999;
+			}
+		}
+	}
+}
