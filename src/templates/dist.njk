@@ -1,0 +1,15 @@
+<link href="css/{{ projectName }}.css" rel="stylesheet" media="all">
+
+<main class="html-style-guide responsivePage">
+	{% for section in layout %}
+		{% set data = section.data %}
+		{% if section.isGlobal %}
+			{% include section.templateId + "/template.njk" %}
+		{% else %}
+			{% include "./partials/" + section.templateId + ".njk" %}
+		{% endif %}
+	{% endfor %}
+</main>
+
+{# <script src="//media.ao.com/uk/cmsimages/pageFiles/js/AoBrightcovePlayer_v2.js"></script> #}
+<script src="scripts/{{ projectName }}.js"></script>

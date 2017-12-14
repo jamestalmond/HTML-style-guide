@@ -1,0 +1,69 @@
+body {
+	min-width: 320px;
+}
+
+.lister-v1 {
+	box-sizing: border-box;
+	max-width: $maxWidth;
+	margin: 0 auto;
+	text-size-adjust: 100%;
+
+	*, *::before, *::after {
+		box-sizing: inherit;
+		text-size-adjust: inherit;
+	}
+
+	h1 {
+		@extend %header-main;
+	}
+
+	h2 {
+		@extend %header-sub;
+	}
+
+	h3 {
+		@extend %header-content-title-plus;
+	}
+
+	h4 {
+		@extend %header-content-title;
+	}
+
+	h5 {
+		@extend %header-section;
+	}
+
+	h6 {
+		@extend %header-module;
+	}
+
+	p {
+		@extend %p1;
+	}
+
+	ul, ol {
+		@extend %p1;
+	}
+
+	a {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	img {
+		vertical-align: middle;
+		max-width: 100%;
+		height: auto;
+		border: none;
+		font-style: italic;
+	}
+
+	svg {
+		vertical-align: middle;
+	}
+
+	.inner {
+		@include aoContainer;
+	}
+}

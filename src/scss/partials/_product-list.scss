@@ -1,0 +1,264 @@
+.switch-view {
+	display: none;
+	margin-top: aoSpace(8);
+	margin-right: auto;
+	margin-left: auto;
+	padding: aoSpace(2) aoSpace(3);
+	font-weight: 700;
+	font-size: aoSpace(2);
+	background: royalblue;
+	color: white;
+	border-radius: aoSpace(0.5);
+	cursor: pointer;
+
+	@media (min-width: $landscape) {
+		display: inline-block;
+	}
+}
+
+.p-list {
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	max-width: $desktop;
+	padding-top: aoSpace(8);
+	padding-bottom: aoSpace(8);
+	animation: fadeIn 1500ms ease;
+
+	&.grid {
+		@media (min-width: $landscape) {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: aoSpace(2);
+		}
+
+		@media (min-width: $tablet) {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+
+		.p-item {
+			display: block;
+
+			@media (min-width: $landscape) {
+				margin-top: 0;
+			}
+		}
+
+		.p-info-buy {
+			display: block;
+		}
+
+		.p-buy {
+			margin-top: aoSpace(2);
+		}
+
+		.p-price {
+			text-align: left;
+		}
+
+		.p-finance {
+			text-align: left;
+		}
+	}
+
+	.p-item {
+		margin-top: aoSpace(2);
+		padding: aoSpace(2);
+		border: 1px solid $aoLightGrey;
+
+		@media (min-width: $landscape) {
+			display: grid;
+			grid-template-columns: 1fr 1.5fr;
+			grid-gap: aoSpace(2);
+		}
+
+		@media (min-width: $tablet) {
+			grid-template-columns: 1fr 2fr;
+		}
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+
+		a {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		&.featured {
+			border-color: $blue;
+		}
+	}
+
+	.p-image-compare {
+		text-align: center;
+	}
+
+	.p-image {
+		margin-bottom: aoSpace(2);
+
+		a {
+			display: block;
+		}
+
+		img { /* stylelint-disable-line selector-max-compound-selectors */
+			width: 225px;
+		}
+	}
+
+	.icon-compare {
+		vertical-align: middle;
+		color: $grey;
+	}
+
+	.p-compare {
+		@include font-size(12);
+
+		display: inline-block;
+		vertical-align: middle;
+		line-height: 1;
+	}
+
+	.p-info-buy {
+		@media (min-width: $tablet) {
+			display: grid;
+			grid-template-columns: 1.75fr 1fr;
+			grid-gap: aoSpace(2);
+		}
+
+		@media (min-width: $desktop) {
+			grid-template-columns: 2.25fr 1fr;
+		}
+	}
+
+	.p-brand {
+		margin-bottom: aoSpace(1);
+
+		img {
+			max-height: aoSpace(5);
+		}
+	}
+
+	.p-title {
+		@include font-size(16);
+
+		margin-bottom: aoSpace(2);
+
+		a {
+			color: inherit;
+		}
+	}
+
+	.p-promo {
+		img {
+			width: 300px;
+		}
+	}
+
+	.p-bullets {
+		@include font-size(12);
+
+		margin-top: aoSpace(2);
+		margin-left: aoSpace(2);
+		list-style-type: disc;
+	}
+
+	.p-buy {
+		@media (max-width: $tablet - 1) {
+			margin-top: aoSpace(2);
+		}
+	}
+
+	.p-price {
+		@include font-size(21);
+
+		font-weight: $bold;
+		color: #000000;
+
+		@media (min-width: $tablet) {
+			text-align: right;
+		}
+	}
+
+	.p-finance {
+		@include font-size(12);
+
+		font-weight: $bold;
+
+		@media (min-width: $tablet) {
+			text-align: right;
+		}
+
+		a {
+			color: $blue;
+		}
+	}
+
+	.p-delivery {
+		position: relative;
+		margin-top: aoSpace(2);
+
+		&::before {
+			@include font-size(16);
+
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			color: $green;
+		}
+
+		span {
+			@include font-size(13);
+
+			display: block;
+			padding-left: aoSpace(4);
+			line-height: 1.25;
+		}
+	}
+
+	.p-incentives-list {
+		margin-top: aoSpace(2);
+
+		li {
+			@include font-size(13);
+
+			position: relative;
+			padding-left: aoSpace(4);
+
+			&::before {
+				content: '\e62b';
+				position: absolute;
+				left: aoSpace(1.5);
+				font-family: 'ao-icons';
+				color: $green;
+			}
+		}
+	}
+
+	.p-btns {
+		margin-top: aoSpace(2);
+
+		a {
+			@include font-size(12);
+
+			display: block;
+
+			&:hover {
+				text-decoration: none;
+			}
+
+			+ a { /* stylelint-disable-line selector-max-compound-selectors */
+				margin-top: aoSpace(1);
+			}
+		}
+	}
+}
